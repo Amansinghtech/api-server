@@ -1,0 +1,64 @@
+Filter 4 data: 
+{
+  operator : '',
+  from : '',
+  to : '',
+  tokeId : '',
+  tokenAmount :''
+}
+
+Result {
+  '0': '0x784E817368a45DCB398Ca9E6B0CaB9d427077e23',
+  '1': '0x784E817368a45DCB398Ca9E6B0CaB9d427077e23',
+  '2': '0x7d2509ddbd245DCB76811Ae698fF5a0dEE6D074E',
+  '3': '1',
+  '4': '100',
+  __length__: 5,
+  _operator: '0x784E817368a45DCB398Ca9E6B0CaB9d427077e23',
+  _from: '0x784E817368a45DCB398Ca9E6B0CaB9d427077e23',
+  _to: '0x7d2509ddbd245DCB76811Ae698fF5a0dEE6D074E',
+  _id: '1',
+  _value: '100'
+}
+
+Result {
+  '0': '0x784E817368a45DCB398Ca9E6B0CaB9d427077e23',      
+  '1': '0x784E817368a45DCB398Ca9E6B0CaB9d427077e23',      
+  '2': '0x7d2509ddbd245DCB76811Ae698fF5a0dEE6D074E',      
+  '3': '1',
+  '4': '1000',
+  __length__: 5,
+  _operator: '0x784E817368a45DCB398Ca9E6B0CaB9d427077e23',
+  _from: '0x784E817368a45DCB398Ca9E6B0CaB9d427077e23',    
+  _to: '0x7d2509ddbd245DCB76811Ae698fF5a0dEE6D074E',      
+  _id: '1',
+  _value: '1000'
+}
+
+filter 3 data 
+Result {
+  '0': '0xa5a34758782b5Aad38a4788d9aD1e58dBa47844f',
+  '1': '1',
+  '2': '0x4e5920546f6b656e000000000000000000000000000000000000000000000000',      
+  '3': '400',
+  __length__: 4,
+  user: '0xa5a34758782b5Aad38a4788d9aD1e58dBa47844f',
+  tokenId: '1',
+  tokenName: '0x4e5920546f6b656e000000000000000000000000000000000000000000000000',
+  tokenAmount: '400'
+}
+
+filter 2 data
+Result {
+  '0': '0x784E817368a45DCB398Ca9E6B0CaB9d427077e23',
+  '1': false,
+  '2': '1',
+  '3': '0x0000000000000000000000000000000000000000000000000000000000000000',
+  '4': '1000',
+  __length__: 5,
+  publisher: '0x784E817368a45DCB398Ca9E6B0CaB9d427077e23',
+  newToken: false,
+  tokenId: '1',
+  tokenName: '0x0000000000000000000000000000000000000000000000000000000000000000',
+  tokenAmount: '1000'
+}

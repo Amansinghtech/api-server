@@ -1,0 +1,111 @@
+var ethers = require('ethers')
+const Web3 = require('web3')
+const datalake = require('./datalake3')
+const contract = require('./model/contract')
+let web3 = new Web3(Web3.givenProvider || 'http://35.225.200.185:8545')
+let contractIns = new web3.eth.Contract(datalake.abi, datalake.contract)
+
+// let provider = ethers.providers.getDefaultProvider('mainnet');
+const provider = new ethers.providers.JsonRpcProvider(
+  'http://35.225.200.185:8545',
+)
+var ContractAddress = datalake.contract
+
+const PurchaedJsonInterface = web3.utils._.find(
+  contractIns._jsonInterface,
+  (o) => o.name === 'Purchased' && o.type === 'event',
+)
+const TokenIssuanceJsonInterface = web3.utils._.find(
+  contractIns._jsonInterface,
+  (o) => o.name === 'TokenIssuance' && o.type === 'event',
+)
+const TokenAwardJsonInterface = web3.utils._.find(
+  contractIns._jsonInterface,
+  (o) => o.name === 'TokenAward' && o.type === 'event',
+)
+const TransferSingleJsonInterface = web3.utils._.find(
+  contractIns._jsonInterface,
+  (o) => o.name === 'TransferSingle' && o.type === 'event',
+)
+let topic1 = PurchaedJsonInterface.signature
+let topic2 = TokenIssuanceJsonInterface.signature
+let topic3 = TokenAwardJsonInterface.signature
+let topic4 = TransferSingleJsonInterface.signature
+
+let filter1 = {
+  address: ContractAddress,
+  topics: [topic1],
+}
+let filter2 = {
+  address: ContractAddress,
+  topics: [topic2],
+}
+let filter3 = {
+  address: ContractAddress,
+  topics: [topic3],
+}
+let filter4 = {
+  address: ContractAddress,
+  topics: [topic4],
+}
+
+provider.on(filter1, (result) => {
+  const eventObj = web3.eth.abi.decodeLog(
+    PurchaedJsonInterface.inputs,
+    result.data,
+    result.topics.slice(1),
+  )
+  console.log('Filter 1 data: ') //to remove later
+  console.log(eventObj)
+  //here you get the event data. based on the data model you get push the data
+  // to mongodb.
+  // ****** Your Mongodb Create operation Goes Here***********
+})
+
+provider.on(filter2, (result) => {
+  const eventObj = web3.eth.abi.decodeLog(
+    TokenIssuanceJsonInterface.inputs,
+    result.data,
+    result.topics.slice(1),
+  )
+  console.log('Filter 2 data: ') //to remove later
+  console.log(eventObj)
+  //here you get the event data. based on the data model you get push the data
+  // to mongodb.
+  // ****** Your Mongodb Create operation Goes Here***********
+})
+provider.on(filter3, (result) => {
+  const eventObj = web3.eth.abi.decodeLog(
+    TokenAwardJsonInterface.inputs,
+    result.data,
+    result.topics.slice(1),
+  )
+  console.log('Filter 3 data: ') //to remove later
+  console.log(eventObj)
+  //here you get the event data. based on the data model you get push the data
+  // to mongodb.
+  // ****** Your Mongodb Create operation Goes Here***********
+})
+provider.on(filter4, (result) => {
+  const eventObj = web3.eth.abi.decodeLog(
+    TransferSingleJsonInterface.inputs,
+    result.data,
+    result.topics.slice(1),
+  )
+  console.log('Filter 4 data: ') //to remove later
+  console.log(eventObj)
+  // console.log(typeof eventObj._value)
+  const data = new contract({
+    operator: eventObj._operator,
+    from: eventObj._from,
+    to: eventObj._to,
+    tokenId: parseInt(eventObj._id),
+    tokenAmount: parseInt(eventObj._value),
+  })
+  data.save()
+
+  console.log(data)
+  //here you get the event data. based on the data model you get push the data
+  // to mongodb.
+  // ****** Your Mongodb Create operation Goes Here***********
+})
