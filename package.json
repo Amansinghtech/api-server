@@ -13,7 +13,7 @@
     "ethers": "^5.0.13",
     "express": "^4.17.1",
     "mongoose": "^5.10.5",
-    "web3": "^1.2.11"
+    "web3": "^4.0.3"
   },
   "devDependencies": {
     "dotenv": "^8.2.0",
